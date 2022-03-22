@@ -451,3 +451,69 @@ CROSS JOIN products p
 ORDER BY sh.name
 
 ```
+
+## UNION
+
+```
+SELECT 
+	customer_id,
+    first_name,
+    points,
+    'Bronze' AS type
+FROM customers
+WHERE points < 2000
+UNION
+SELECT 
+	customer_id,
+    first_name,
+    points,
+    'SILVER' AS type
+FROM customers
+WHERE points BETWEEN 2000 AND 3000
+
+
+```
+
+## INSERT TO ROWS DATA
+
+```
+INSERT INTO customers (
+	first_name,
+    last_name,
+    birth_date,
+    address,
+    city,
+    state)
+VALUES (
+    'John', 
+    'Smith', 
+    '1991-05-05',
+	'address',
+    'city',
+    'CA'
+    )
+
+```
+
+## Inserting Multiple Rows 
+
+```
+INSERT INTO products(name, quantity_in_stock, unit_price)
+VALUES ('Product1',10,1.95),
+	    ('Product2',11,1.95),
+       ('Product3',12,1.95)
+
+```
+
+## Inserting Hierarchical Rows 
+
+```
+INSERT INTO orders(customer_id, order_date, status)
+VALUES (1,'2022-04-04',1);
+
+INSERT INTO order_items
+VALUES
+	 (LAST_INSERT_ID(), 1, 1, 2.95),
+    (LAST_INSERT_ID(), 2, 1, 3.95)
+
+```
